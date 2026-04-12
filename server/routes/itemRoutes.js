@@ -7,7 +7,7 @@ import {
 } from "../controllers/itemController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { updateItem } from "../controllers/itemController.js";
-
+import { resolveItem } from "../controllers/itemController.js";
 
 
 const router = express.Router();
@@ -17,6 +17,7 @@ router.get("/", getItems);
 router.get("/my", protect, getMyItems);
 router.delete("/:id", protect, deleteItem);
 router.put("/:id", protect, updateItem);
+router.put("/:id/resolve", protect, resolveItem);
 
 
 export default router;

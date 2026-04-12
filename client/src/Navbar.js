@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -17,9 +17,14 @@ function Navbar() {
       </h1>
 
       <div className="flex gap-4">
-        <button onClick={() => navigate("/items")}>Items</button>
-        <button onClick={() => navigate("/my-items")}>My Items</button>
-        <button onClick={() => navigate("/chat")}>Chat</button>
+        <Link to="/dashboard" className="hover:text-blue-200 transition">Dashboard</Link>
+        <Link to="/add-item" className="hover:text-blue-200 transition">Report Item</Link>
+        <Link to="/items" className="hover:text-blue-200 transition">All Items</Link>
+        <Link to="/my-items" className="hover:text-blue-200 transition">My Items</Link>
+        <Link to="/chat" className="hover:text-blue-200 transition">Messages</Link>
+        {user?.role === "admin" && (
+          <Link to="/admin" className="text-amber-300 hover:text-amber-200 font-bold transition">Admin Panel</Link>
+        )}
 
         <button onClick={logout} className="bg-red-500 px-3 py-1 rounded">
           Logout

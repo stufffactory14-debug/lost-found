@@ -18,6 +18,7 @@ export const createItem = async (req, res) => {
 export const getItems = async (req, res) => {
   try {
     const items = await Item.find().populate("user", "name email");
+    console.log("getall items")
     res.json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -77,6 +78,47 @@ export const updateItem = async (req, res) => {
 
     res.json(updated);
   } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+/* 🔥 RESOLVE ITEM */
+// export const resolveItem = async (req, res) => {
+//   try {
+//     const item = await Item.findById(req.params.id);
+
+//     if (!item) {
+//       return res.status(404).json({ message: "Item not found" });
+//     }
+
+//     // 🔥 FIXED COMPARISON
+//     if (item.user.toString() !== req.user.toString()) {
+//       return res.status(401).json({ message: "Not authorized" });
+//     }
+
+//     item.status = "resolved";
+//     await item.save();
+
+//     res.json(item);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
+export const resolveItem = async (req, res) => {
+  try {
+    const updated = await Item.findByIdAndUpdate(
+      req.params.id,
+      { status: "resolved" },
+      { new: true }
+    );
+
+    console.log("UPDATED:", updated.status);
+
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: err.message });
   }
 };

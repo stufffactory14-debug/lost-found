@@ -8,6 +8,7 @@ import Items from "./Items";
 import MyItems from "./MyItems";
 import EditItem from "./EditItem";
 import Register from "./Register";
+import AdminDashboard from "./AdminDashboard";
 
 
 
@@ -24,6 +25,7 @@ function App() {
 <Route path="/my-items" element={<MyItems />} />
 <Route path="/edit/:id" element={<EditItem />} />
 <Route path="/register" element={<Register />} />
+<Route path="/admin" element={<AdminDashboard />} />
 </Routes>
     </BrowserRouter>
   );
